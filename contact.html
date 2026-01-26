@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Brad's Arcades for arcade machine repairs, sales, rentals, and more. Call or text (248) 255-5793.">
+  <title>Contact | Brad's Arcades</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/BradsArcadesLogo.png" alt="Brad's Arcades Logo">
+      </a>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="locations.html">Locations</a></li>
+        <li><a href="socials.html">Socials</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1 class="neon-text">Contact Us</h1>
+    <p>Get in touch - we'd love to hear from you!</p>
+  </header>
+
+  <!-- Content -->
+  <section class="content-section">
+    <div class="contact-wrapper">
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h2>Get In Touch</h2>
+        <p>
+          Have a question about buying, selling, or repairing an arcade machine? Want to rent equipment for an event? We're here to help!
+        </p>
+        <p>
+          The fastest way to reach us is by phone or text.
+        </p>
+        <div class="phone-cta">
+          <p>Call or Text</p>
+          <a href="tel:2482555793" class="phone-number">(248) 255-5793</a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h2>Send a Message</h2>
+        <!-- Replace YOUR_FORM_ID with actual Formspree form ID -->
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="How can we help you?"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Brad's Arcades. All rights reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
