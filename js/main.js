@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function setNavOpen(open) {
       navLinks.classList.toggle('active', open);
       navToggle.classList.toggle('active', open);
-      navLinks.style.display = open ? 'flex' : 'none';
       navToggle.setAttribute('aria-expanded', String(open));
     }
 
