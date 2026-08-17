@@ -144,4 +144,10 @@ document.addEventListener('DOMContentLoaded', function() {
       link.classList.add('active');
     }
   });
+
+  // Keep the footer copyright year current automatically
+  const copyrightYear = document.getElementById('copyright-year');
+  if (copyrightYear) {
+    copyrightYear.textContent = new Date().getFullYear();
+  }
 });

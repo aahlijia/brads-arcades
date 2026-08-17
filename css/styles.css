@@ -520,16 +520,6 @@ a:hover {
   z-index: 10;
 }
 
-.location-name {
-  font-weight: bold;
-  color: var(--primary);
-}
-
-.location-city {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
 /* Socials Page */
 .socials-grid {
   display: grid;
