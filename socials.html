@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Follow Brad's Arcades on social media for the latest updates on arcade machines, pinball, and more.">
   <title>Socials | Brad's Arcades</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -14,12 +17,12 @@
       <a href="index.html" class="nav-logo">
         <img src="images/BradsArcadesLogo.png" alt="Brad's Arcades Logo" width="400" height="178">
       </a>
-      <div class="nav-toggle">
+      <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
         <span></span>
         <span></span>
         <span></span>
-      </div>
-      <ul class="nav-links">
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="locations.html">Locations</a></li>

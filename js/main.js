@@ -4,36 +4,38 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelector('.nav-links');
 
   if (navToggle && navLinks) {
+    function setNavOpen(open) {
+      navLinks.classList.toggle('active', open);
+      navToggle.classList.toggle('active', open);
+      navLinks.style.display = open ? 'flex' : 'none';
+      navToggle.setAttribute('aria-expanded', String(open));
+    }
+
     navToggle.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      const isActive = navLinks.classList.contains('active');
-      if (isActive) {
-        navLinks.classList.remove('active');
-        navToggle.classList.remove('active');
-        navLinks.style.display = 'none';
-      } else {
-        navLinks.classList.add('active');
-        navToggle.classList.add('active');
-        navLinks.style.display = 'flex';
-      }
+      setNavOpen(!navLinks.classList.contains('active'));
     });
 
     // Close menu when clicking a link
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', function() {
-        navLinks.classList.remove('active');
-        navToggle.classList.remove('active');
-        navLinks.style.display = 'none';
+        setNavOpen(false);
       });
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', function(e) {
       if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-        navLinks.classList.remove('active');
-        navToggle.classList.remove('active');
-        navLinks.style.display = 'none';
+        setNavOpen(false);
+      }
+    });
+
+    // Close menu on Escape, and return focus to the toggle button
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+        setNavOpen(false);
+        navToggle.focus();
       }
     });
   }
@@ -45,24 +47,22 @@ document.addEventListener('DOMContentLoaded', function() {
   initLocationSlideshows();
 });
 
-// Hero Slideshow Functionality
-function initHeroSlideshow() {
-  const slideshow = document.querySelector('.hero .slideshow');
-  if (!slideshow) return;
-
+// Wires up autoplay, dot navigation, and pause-on-interaction for one
+// slideshow. Shared by the hero and each location gallery so the rotation
+// logic isn't duplicated per instance.
+function createSlideshow(slideshow, dotsContainer, interval) {
   const slides = slideshow.querySelectorAll('.slide');
-  const dotsContainer = document.querySelector('.hero .slideshow-controls');
-
   if (slides.length === 0) return;
 
   let currentSlide = 0;
   let slideInterval;
 
-  // Create dots
   if (dotsContainer) {
     slides.forEach((_, index) => {
-      const dot = document.createElement('div');
+      const dot = document.createElement('button');
+      dot.type = 'button';
       dot.classList.add('slideshow-dot');
+      dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
       if (index === 0) dot.classList.add('active');
       dot.addEventListener('click', () => goToSlide(index));
       dotsContainer.appendChild(dot);
@@ -88,7 +88,7 @@ function initHeroSlideshow() {
   }
 
   function startSlideshow() {
-    slideInterval = setInterval(nextSlide, 4000);
+    slideInterval = setInterval(nextSlide, interval);
   }
 
   function stopSlideshow() {
@@ -98,9 +98,21 @@ function initHeroSlideshow() {
   // Start automatic slideshow
   startSlideshow();
 
-  // Pause on hover
+  // Pause on hover (mouse) and focus (keyboard), per WCAG 2.2.2 - auto
+  // rotation must be stoppable without a mouse.
   slideshow.addEventListener('mouseenter', stopSlideshow);
   slideshow.addEventListener('mouseleave', startSlideshow);
+  slideshow.addEventListener('focusin', stopSlideshow);
+  slideshow.addEventListener('focusout', startSlideshow);
+}
+
+// Hero Slideshow Functionality
+function initHeroSlideshow() {
+  const slideshow = document.querySelector('.hero .slideshow');
+  if (!slideshow) return;
+
+  const dotsContainer = document.querySelector('.hero .slideshow-controls');
+  createSlideshow(slideshow, dotsContainer, 4000);
 }
 
 // Location Slideshows Functionality
@@ -117,52 +129,7 @@ function initLocationSlideshows() {
       return;
     }
 
-    let currentSlide = 0;
-    let slideInterval;
-
-    // Create dots
-    if (dotsContainer) {
-      slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('slideshow-dot');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index));
-        dotsContainer.appendChild(dot);
-      });
-    }
-
-    const dots = dotsContainer ? dotsContainer.querySelectorAll('.slideshow-dot') : [];
-
-    function goToSlide(index) {
-      slides[currentSlide].classList.remove('active');
-      if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
-
-      currentSlide = index;
-      if (currentSlide >= slides.length) currentSlide = 0;
-      if (currentSlide < 0) currentSlide = slides.length - 1;
-
-      slides[currentSlide].classList.add('active');
-      if (dots[currentSlide]) dots[currentSlide].classList.add('active');
-    }
-
-    function nextSlide() {
-      goToSlide(currentSlide + 1);
-    }
-
-    function startSlideshow() {
-      slideInterval = setInterval(nextSlide, 3000);
-    }
-
-    function stopSlideshow() {
-      clearInterval(slideInterval);
-    }
-
-    // Start automatic slideshow
-    startSlideshow();
-
-    // Pause on hover
-    slideshow.addEventListener('mouseenter', stopSlideshow);
-    slideshow.addEventListener('mouseleave', startSlideshow);
+    createSlideshow(slideshow, dotsContainer, 3000);
   });
 }
 
