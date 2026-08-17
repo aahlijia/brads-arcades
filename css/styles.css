@@ -1,13 +1,13 @@
 /* CSS Variables */
 :root {
-  --primary: #ff00ff;
-  --secondary: #00ffff;
-  --accent: #39ff14;
-  --background: #1a0a2e;
-  --background-darker: #0d0519;
-  --text: #ffffff;
-  --text-muted: #b8b8b8;
-  --card-bg: rgba(26, 10, 46, 0.9);
+  --paper: #ffffff;
+  --paper-dim: #f6f4ee;
+  --ink: #17101f;
+  --mist: #b9afc4;
+  --pink: #ff1e8c;
+  --cyan: #00b8cc;
+  --green: #17ae49;
+  --amber: #ffb100;
 }
 
 /* Reset */
@@ -25,11 +25,16 @@ html {
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: var(--background);
-  color: var(--text);
+  background-color: var(--paper);
+  color: var(--ink);
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+::selection {
+  background: var(--pink);
+  color: var(--paper);
 }
 
 /* Prevent horizontal scroll */
@@ -56,62 +61,55 @@ a, button {
   justify-content: center;
 }
 
-/* Retro Grid Background */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background:
-    linear-gradient(rgba(255, 0, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 0, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
-  z-index: -1;
+h1, h2, h3, h4 {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
-h1, h2, h3, h4 {
+/* The two "marquee moments" - the only places the pixel font appears */
+.hero-content h1,
+.page-header h1 {
   font-family: 'Press Start 2P', cursive;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 a {
-  color: var(--secondary);
-  text-decoration: none;
-  transition: all 0.3s ease;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--pink);
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--primary);
-  text-shadow: 0 0 10px var(--primary);
+  color: var(--pink);
 }
 
-/* Neon Text Effect */
+:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 2px;
+}
+
+/* Marquee Glow - reserved for the hero title, page-header title, and the
+   phone CTA. Used sparingly so it stays a moment, not wallpaper. */
 .neon-text {
-  color: var(--accent);
+  color: var(--amber);
   text-shadow:
-    0 0 1px var(--accent),
-    0 0 2px var(--accent);
-}
-
-.neon-text-cyan {
-  color: var(--secondary);
-  text-shadow:
-    0 0 1px var(--secondary),
-    0 0 2px var(--secondary);
+    0 0 6px rgba(255, 177, 0, 0.6),
+    0 0 16px rgba(255, 177, 0, 0.35);
 }
 
 /* Navigation */
 .navbar {
-  background-color: var(--background-darker);
+  background-color: var(--ink);
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 2px solid var(--primary);
-  box-shadow: 0 2px 20px rgba(255, 0, 255, 0.3);
+  border-bottom: 3px solid var(--amber);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .nav-container {
@@ -126,18 +124,12 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 1rem;
+  text-decoration: none;
 }
 
 .nav-logo img {
   height: 80px;
   width: auto;
-}
-
-.nav-logo span {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.9rem;
-  color: var(--primary);
-  text-shadow: 0 0 10px var(--primary);
 }
 
 .nav-links {
@@ -147,20 +139,23 @@ a:hover {
 }
 
 .nav-links a {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.7rem;
-  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
   padding: 0.5rem 1rem;
   border: 2px solid transparent;
-  transition: all 0.3s ease;
+  border-radius: 3px;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--secondary);
-  border-color: var(--secondary);
-  text-shadow: 0 0 10px var(--secondary);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  color: var(--amber);
+  border-color: var(--amber);
 }
 
 /* Mobile Menu */
@@ -178,7 +173,7 @@ a:hover {
 .nav-toggle span {
   width: 28px;
   height: 3px;
-  background: var(--primary);
+  background: var(--amber);
   transition: all 0.3s ease;
   transform-origin: center;
 }
@@ -235,11 +230,11 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(13, 5, 25, 0.3),
-    rgba(13, 5, 25, 0.7)
-  );
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 16, 31, 0.35), rgba(23, 16, 31, 0.75));
+  background-size: 28px 28px, 28px 28px, 100% 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -259,6 +254,7 @@ a:hover {
   font-size: 1.2rem;
   max-width: 600px;
   margin: 0 auto;
+  color: var(--paper);
 }
 
 /* Slideshow Controls */
@@ -275,11 +271,11 @@ a:hover {
 .slideshow-dot {
   width: 12px;
   height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.4);
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid var(--secondary);
+  transition: all 0.2s ease;
+  border: 2px solid var(--paper);
   position: relative;
 }
 
@@ -295,8 +291,8 @@ a:hover {
 
 .slideshow-dot.active,
 .slideshow-dot:hover {
-  background: var(--secondary);
-  box-shadow: 0 0 10px var(--secondary);
+  background: var(--amber);
+  border-color: var(--amber);
 }
 
 /* Services Section */
@@ -309,8 +305,16 @@ a:hover {
 .services h2 {
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: 3rem;
-  color: var(--secondary);
+  color: var(--ink);
+}
+
+.services h2::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 4px;
+  background: var(--pink);
+  margin: 1rem auto 2rem;
 }
 
 .services-grid {
@@ -322,17 +326,20 @@ a:hover {
 .service-card {
   position: relative;
   height: 350px;
-  border-radius: 10px;
+  border-radius: 3px;
   overflow: hidden;
-  border: 2px solid var(--primary);
-  transition: all 0.3s ease;
+  border: 3px solid var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow:
-    0 10px 30px rgba(255, 0, 255, 0.3),
-    0 0 20px rgba(255, 0, 255, 0.2);
+.services-grid .service-card:nth-child(1) { box-shadow: 6px 6px 0 var(--pink); }
+.services-grid .service-card:nth-child(2) { box-shadow: 6px 6px 0 var(--cyan); }
+.services-grid .service-card:nth-child(3) { box-shadow: 6px 6px 0 var(--amber); }
+
+.service-card:focus-within,
+.service-card:active {
+  transform: translate(6px, 6px);
+  box-shadow: none;
 }
 
 .service-card img {
@@ -340,10 +347,6 @@ a:hover {
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
-}
-
-.service-card:hover img {
-  transform: scale(1.05);
 }
 
 .service-overlay {
@@ -354,8 +357,8 @@ a:hover {
   padding: 2rem;
   background: linear-gradient(
     to top,
-    rgba(13, 5, 25, 0.95),
-    rgba(13, 5, 25, 0.7),
+    rgba(23, 16, 31, 0.95),
+    rgba(23, 16, 31, 0.7),
     transparent
   );
 }
@@ -363,20 +366,25 @@ a:hover {
 .service-overlay h3 {
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: var(--accent);
+  color: var(--amber);
 }
 
 .service-overlay p {
   font-size: 0.9rem;
   line-height: 1.5;
+  color: var(--paper);
 }
 
 /* Page Header */
 .page-header {
-  background: linear-gradient(135deg, var(--background-darker), var(--background));
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
   padding: 4rem 2rem;
   text-align: center;
-  border-bottom: 2px solid var(--primary);
+  border-bottom: 3px solid var(--amber);
 }
 
 .page-header h1 {
@@ -387,7 +395,7 @@ a:hover {
 .page-header p {
   max-width: 600px;
   margin: 0 auto;
-  color: var(--text-muted);
+  color: var(--mist);
 }
 
 /* Content Section */
@@ -399,11 +407,11 @@ a:hover {
 
 /* About Page */
 .about-content {
-  background: var(--card-bg);
+  background: var(--paper-dim);
   padding: 3rem;
-  border-radius: 10px;
-  border: 2px solid var(--secondary);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  border-radius: 3px;
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--cyan);
 }
 
 .about-content p {
@@ -416,23 +424,29 @@ a:hover {
   text-align: center;
   margin-top: 2rem;
   padding: 2rem;
-  background: var(--background-darker);
-  border-radius: 10px;
-  border: 2px solid var(--accent);
+  background: var(--ink);
+  border-radius: 3px;
+  border: 3px solid var(--amber);
 }
 
 .phone-cta p {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
   font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   margin-bottom: 1rem;
-  color: var(--accent);
+  color: var(--mist);
 }
 
 .phone-number {
   font-family: 'Press Start 2P', cursive;
   font-size: 1.5rem;
-  color: var(--primary);
-  text-shadow: 0 0 10px var(--primary);
+  color: var(--pink);
+  text-decoration: none;
+  text-shadow:
+    0 0 6px rgba(255, 30, 140, 0.55),
+    0 0 16px rgba(255, 30, 140, 0.3);
 }
 
 /* Locations Page */
@@ -444,15 +458,21 @@ a:hover {
 }
 
 .location-card {
-  border-radius: 10px;
+  border-radius: 3px;
   overflow: hidden;
-  border: 2px solid var(--primary);
-  transition: all 0.3s ease;
+  border: 3px solid var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.location-card:hover {
-  box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
-  transform: translateY(-5px);
+.locations-page .location-card:nth-child(4n + 1) { box-shadow: 6px 6px 0 var(--pink); }
+.locations-page .location-card:nth-child(4n + 2) { box-shadow: 6px 6px 0 var(--cyan); }
+.locations-page .location-card:nth-child(4n + 3) { box-shadow: 6px 6px 0 var(--amber); }
+.locations-page .location-card:nth-child(4n) { box-shadow: 6px 6px 0 var(--green); }
+
+.location-card:focus-within,
+.location-card:active {
+  transform: translate(6px, 6px);
+  box-shadow: none;
 }
 
 .location-slideshow {
@@ -489,27 +509,22 @@ a:hover {
   padding: 1.5rem;
   background: linear-gradient(
     to top,
-    rgba(13, 5, 25, 0.95),
-    rgba(13, 5, 25, 0.7),
+    rgba(23, 16, 31, 0.95),
+    rgba(23, 16, 31, 0.7),
     transparent
   );
   z-index: 5;
 }
 
 .location-overlay h3 {
-  font-family: 'Press Start 2P', cursive;
   font-size: 0.9rem;
-  color: var(--accent);
+  color: var(--amber);
   margin-bottom: 0.5rem;
-  text-shadow:
-    0 0 2px #fff,
-    0 0 4px var(--accent),
-    0 0 8px var(--accent);
 }
 
 .location-overlay p {
   font-size: 1rem;
-  color: var(--secondary);
+  color: var(--cyan);
 }
 
 .location-slideshow .slideshow-controls {
@@ -530,17 +545,21 @@ a:hover {
 }
 
 .social-card {
-  background: var(--card-bg);
+  background: var(--paper-dim);
   padding: 2rem;
-  border-radius: 10px;
-  border: 2px solid var(--primary);
+  border-radius: 3px;
+  border: 3px solid var(--ink);
   text-align: center;
-  transition: all 0.3s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.social-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(255, 0, 255, 0.3);
+.socials-grid .social-card:nth-child(1) { box-shadow: 6px 6px 0 var(--pink); }
+.socials-grid .social-card:nth-child(2) { box-shadow: 6px 6px 0 var(--amber); }
+
+.social-card:focus-within,
+.social-card:active {
+  transform: translate(6px, 6px);
+  box-shadow: none;
 }
 
 .social-icon {
@@ -551,25 +570,25 @@ a:hover {
 .social-card h3 {
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
-  color: var(--secondary);
+  color: var(--ink);
 }
 
 .social-link {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.75rem 1.5rem;
-  background: var(--primary);
-  color: var(--text);
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.6rem;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.social-link:hover {
-  background: var(--secondary);
-  color: var(--background);
-  box-shadow: 0 0 20px var(--secondary);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 3px solid var(--ink);
+  border-radius: 3px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
 /* Contact Page */
@@ -581,16 +600,25 @@ a:hover {
 }
 
 .contact-info {
-  background: var(--card-bg);
+  background: var(--paper-dim);
   padding: 2rem;
-  border-radius: 10px;
-  border: 2px solid var(--accent);
+  border-radius: 3px;
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--cyan);
 }
 
 .contact-info h2 {
   font-size: 1rem;
-  margin-bottom: 1.5rem;
-  color: var(--accent);
+  color: var(--ink);
+}
+
+.contact-info h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 4px;
+  background: var(--cyan);
+  margin: 0.75rem 0 1.5rem;
 }
 
 .contact-info p {
@@ -599,16 +627,25 @@ a:hover {
 }
 
 .contact-form {
-  background: var(--card-bg);
+  background: var(--paper-dim);
   padding: 2rem;
-  border-radius: 10px;
-  border: 2px solid var(--primary);
+  border-radius: 3px;
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--pink);
 }
 
 .contact-form h2 {
   font-size: 1rem;
-  margin-bottom: 1.5rem;
-  color: var(--primary);
+  color: var(--ink);
+}
+
+.contact-form h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 4px;
+  background: var(--pink);
+  margin: 0.75rem 0 1.5rem;
 }
 
 .form-group {
@@ -617,30 +654,33 @@ a:hover {
 
 .form-group label {
   display: block;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.6rem;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   margin-bottom: 0.5rem;
-  color: var(--secondary);
+  color: var(--ink);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
   padding: 1rem;
-  background: var(--background-darker);
-  border: 2px solid var(--primary);
-  border-radius: 5px;
-  color: var(--text);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  color: var(--ink);
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--secondary);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(255, 30, 140, 0.15);
 }
 
 .form-group textarea {
@@ -651,35 +691,70 @@ a:hover {
 .submit-btn {
   width: 100%;
   padding: 1rem 2rem;
-  background: var(--primary);
-  color: var(--text);
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 5px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 3px solid var(--ink);
+  border-radius: 3px;
+  box-shadow: 5px 5px 0 var(--pink);
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.submit-btn:hover {
-  background: var(--secondary);
-  color: var(--background);
-  box-shadow: 0 0 20px var(--secondary);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
 /* Footer */
 .footer {
-  background: var(--background-darker);
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
   padding: 2rem;
   text-align: center;
-  border-top: 2px solid var(--primary);
+  border-top: 3px solid var(--amber);
   margin-top: auto;
 }
 
 .footer p {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.6rem;
-  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--mist);
+}
+
+/* Hover interactions - scoped to real pointer+hover devices so touch
+   screens never get a "stuck" hover state after a tap (they get :active
+   below instead, which does the same press-into-shadow motion). */
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    transform: translate(6px, 6px);
+    box-shadow: none;
+  }
+
+  .service-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .location-card:hover {
+    transform: translate(6px, 6px);
+    box-shadow: none;
+  }
+
+  .social-card:hover {
+    transform: translate(6px, 6px);
+    box-shadow: none;
+  }
+
+  .submit-btn:hover,
+  .social-link:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translate(5px, 5px);
+    box-shadow: none;
+  }
 }
 
 /* Responsive Design */
@@ -712,11 +787,11 @@ a:hover {
     left: 0;
     right: 0;
     flex-direction: column;
-    background: var(--background-darker);
+    background: var(--ink);
     padding: 0;
     gap: 0;
     display: none;
-    border-bottom: 2px solid var(--primary);
+    border-bottom: 3px solid var(--amber);
     max-height: calc(100vh - 100px);
     overflow-y: auto;
     z-index: 1000;
@@ -731,7 +806,7 @@ a:hover {
 
   .nav-links li {
     width: 100%;
-    border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .nav-links li:last-child {
@@ -792,7 +867,6 @@ a:hover {
 
   .services h2 {
     font-size: 1.1rem;
-    margin-bottom: 2rem;
   }
 
   .services-grid {
@@ -1010,24 +1084,24 @@ a:hover {
 
 /* Touch device improvements */
 @media (hover: none) and (pointer: coarse) {
-  .service-card:hover,
-  .location-card:hover,
-  .social-card:hover {
-    transform: none;
-  }
-
   .service-card:active,
   .location-card:active,
   .social-card:active {
-    transform: scale(0.98);
+    transform: translate(4px, 4px);
+    box-shadow: none;
   }
 
   .nav-links a:active {
-    background: rgba(255, 0, 255, 0.2);
+    color: var(--amber);
+    border-color: var(--amber);
   }
 
-  .submit-btn:active {
-    transform: scale(0.98);
+  .submit-btn:active,
+  .social-link:active {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translate(4px, 4px);
+    box-shadow: none;
   }
 }
 
@@ -1043,5 +1117,16 @@ a:hover {
 
   .page-header {
     padding: 1.5rem;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
   }
 }
