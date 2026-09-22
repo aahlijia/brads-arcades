@@ -8,6 +8,7 @@
   --cyan: #00b8cc;
   --green: #17ae49;
   --amber: #ffb100;
+  --neon-green: #39ff14;
 }
 
 /* Reset */
@@ -68,8 +69,7 @@ h1, h2, h3, h4 {
   letter-spacing: 0.02em;
 }
 
-/* The two "marquee moments" - the only places the pixel font appears */
-.hero-content h1,
+/* The marquee moment - the only place the pixel font appears */
 .page-header h1 {
   font-family: 'Press Start 2P', cursive;
   letter-spacing: 0;
@@ -92,23 +92,21 @@ a:hover {
   outline-offset: 2px;
 }
 
-/* Marquee Glow - reserved for the hero title, page-header title, and the
-   phone CTA. Used sparingly so it stays a moment, not wallpaper. */
+/* Marquee Glow - reserved for the page-header title. Used sparingly so
+   it stays a moment, not wallpaper. */
 .neon-text {
-  color: var(--amber);
-  text-shadow:
-    0 0 6px rgba(255, 177, 0, 0.6),
-    0 0 16px rgba(255, 177, 0, 0.35);
+  color: var(--neon-green);
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.35);
 }
 
 /* Navigation */
 .navbar {
   background-color: var(--ink);
-  padding: 1rem 2rem;
+  padding: 0.65rem 2rem;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 3px solid var(--amber);
+  border-bottom: 1px solid var(--amber);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -116,46 +114,34 @@ a:hover {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-decoration: none;
-}
-
-.nav-logo img {
-  height: 80px;
-  width: auto;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .nav-links a {
   font-family: 'Space Mono', monospace;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--paper);
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border: 2px solid transparent;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid transparent;
   border-radius: 3px;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--amber);
-  border-color: var(--amber);
+  color: var(--neon-green);
+  border-color: var(--neon-green);
 }
 
 /* Mobile Menu */
@@ -231,8 +217,8 @@ a:hover {
   width: 100%;
   height: 100%;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(23, 16, 31, 0.35), rgba(23, 16, 31, 0.75));
   background-size: 28px 28px, 28px 28px, 100% 100%;
   display: flex;
@@ -245,9 +231,11 @@ a:hover {
   padding: 2rem;
 }
 
-.hero-content h1 {
-  font-size: 2.5rem;
+.hero-logo {
+  width: min(400px, 80vw);
+  height: auto;
   margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
 }
 
 .hero-content p {
@@ -328,17 +316,17 @@ a:hover {
   height: 350px;
   border-radius: 3px;
   overflow: hidden;
-  border: 3px solid var(--ink);
+  border: 2px solid var(--ink);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.services-grid .service-card:nth-child(1) { box-shadow: 6px 6px 0 var(--pink); }
-.services-grid .service-card:nth-child(2) { box-shadow: 6px 6px 0 var(--cyan); }
-.services-grid .service-card:nth-child(3) { box-shadow: 6px 6px 0 var(--amber); }
+.services-grid .service-card:nth-child(1) { box-shadow: 3px 3px 0 var(--pink); }
+.services-grid .service-card:nth-child(2) { box-shadow: 3px 3px 0 var(--cyan); }
+.services-grid .service-card:nth-child(3) { box-shadow: 3px 3px 0 var(--amber); }
 
 .service-card:focus-within,
 .service-card:active {
-  transform: translate(6px, 6px);
+  transform: translate(3px, 3px);
   box-shadow: none;
 }
 
@@ -379,12 +367,12 @@ a:hover {
 .page-header {
   background-color: var(--ink);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 28px 28px;
   padding: 4rem 2rem;
   text-align: center;
-  border-bottom: 3px solid var(--amber);
+  border-bottom: 2px solid var(--amber);
 }
 
 .page-header h1 {
@@ -410,8 +398,8 @@ a:hover {
   background: var(--paper-dim);
   padding: 3rem;
   border-radius: 3px;
-  border: 3px solid var(--ink);
-  box-shadow: 6px 6px 0 var(--cyan);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--cyan);
 }
 
 .about-content p {
@@ -426,7 +414,7 @@ a:hover {
   padding: 2rem;
   background: var(--ink);
   border-radius: 3px;
-  border: 3px solid var(--amber);
+  border: 2px solid var(--amber);
 }
 
 .phone-cta p {
@@ -444,9 +432,7 @@ a:hover {
   font-size: 1.5rem;
   color: var(--pink);
   text-decoration: none;
-  text-shadow:
-    0 0 6px rgba(255, 30, 140, 0.55),
-    0 0 16px rgba(255, 30, 140, 0.3);
+  text-shadow: 0 0 8px rgba(255, 30, 140, 0.3);
 }
 
 /* Locations Page */
@@ -460,18 +446,18 @@ a:hover {
 .location-card {
   border-radius: 3px;
   overflow: hidden;
-  border: 3px solid var(--ink);
+  border: 2px solid var(--ink);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.locations-page .location-card:nth-child(4n + 1) { box-shadow: 6px 6px 0 var(--pink); }
-.locations-page .location-card:nth-child(4n + 2) { box-shadow: 6px 6px 0 var(--cyan); }
-.locations-page .location-card:nth-child(4n + 3) { box-shadow: 6px 6px 0 var(--amber); }
-.locations-page .location-card:nth-child(4n) { box-shadow: 6px 6px 0 var(--green); }
+.locations-page .location-card:nth-child(4n + 1) { box-shadow: 3px 3px 0 var(--pink); }
+.locations-page .location-card:nth-child(4n + 2) { box-shadow: 3px 3px 0 var(--cyan); }
+.locations-page .location-card:nth-child(4n + 3) { box-shadow: 3px 3px 0 var(--amber); }
+.locations-page .location-card:nth-child(4n) { box-shadow: 3px 3px 0 var(--green); }
 
 .location-card:focus-within,
 .location-card:active {
-  transform: translate(6px, 6px);
+  transform: translate(3px, 3px);
   box-shadow: none;
 }
 
@@ -548,17 +534,17 @@ a:hover {
   background: var(--paper-dim);
   padding: 2rem;
   border-radius: 3px;
-  border: 3px solid var(--ink);
+  border: 2px solid var(--ink);
   text-align: center;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.socials-grid .social-card:nth-child(1) { box-shadow: 6px 6px 0 var(--pink); }
-.socials-grid .social-card:nth-child(2) { box-shadow: 6px 6px 0 var(--amber); }
+.socials-grid .social-card:nth-child(1) { box-shadow: 3px 3px 0 var(--pink); }
+.socials-grid .social-card:nth-child(2) { box-shadow: 3px 3px 0 var(--amber); }
 
 .social-card:focus-within,
 .social-card:active {
-  transform: translate(6px, 6px);
+  transform: translate(3px, 3px);
   box-shadow: none;
 }
 
@@ -585,9 +571,9 @@ a:hover {
   font-size: 0.65rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  border: 3px solid var(--ink);
+  border: 2px solid var(--ink);
   border-radius: 3px;
-  box-shadow: 3px 3px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
@@ -603,8 +589,8 @@ a:hover {
   background: var(--paper-dim);
   padding: 2rem;
   border-radius: 3px;
-  border: 3px solid var(--ink);
-  box-shadow: 6px 6px 0 var(--cyan);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--cyan);
 }
 
 .contact-info h2 {
@@ -630,8 +616,8 @@ a:hover {
   background: var(--paper-dim);
   padding: 2rem;
   border-radius: 3px;
-  border: 3px solid var(--ink);
-  box-shadow: 6px 6px 0 var(--pink);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--pink);
 }
 
 .contact-form h2 {
@@ -698,9 +684,9 @@ a:hover {
   font-size: 0.85rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  border: 3px solid var(--ink);
+  border: 2px solid var(--ink);
   border-radius: 3px;
-  box-shadow: 5px 5px 0 var(--pink);
+  box-shadow: 3px 3px 0 var(--pink);
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
@@ -709,12 +695,12 @@ a:hover {
 .footer {
   background-color: var(--ink);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 28px 28px;
   padding: 2rem;
   text-align: center;
-  border-top: 3px solid var(--amber);
+  border-top: 2px solid var(--amber);
   margin-top: auto;
 }
 
@@ -730,7 +716,7 @@ a:hover {
    below instead, which does the same press-into-shadow motion). */
 @media (hover: hover) and (pointer: fine) {
   .service-card:hover {
-    transform: translate(6px, 6px);
+    transform: translate(3px, 3px);
     box-shadow: none;
   }
 
@@ -739,12 +725,12 @@ a:hover {
   }
 
   .location-card:hover {
-    transform: translate(6px, 6px);
+    transform: translate(3px, 3px);
     box-shadow: none;
   }
 
   .social-card:hover {
-    transform: translate(6px, 6px);
+    transform: translate(3px, 3px);
     box-shadow: none;
   }
 
@@ -752,7 +738,7 @@ a:hover {
   .social-link:hover {
     background: var(--ink);
     color: var(--paper);
-    transform: translate(5px, 5px);
+    transform: translate(2px, 2px);
     box-shadow: none;
   }
 }
@@ -763,9 +749,13 @@ a:hover {
 @media (max-width: 768px) {
   /* Navigation */
   .navbar {
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 1rem;
     position: relative;
     overflow: visible;
+  }
+
+  .nav-container {
+    justify-content: flex-end;
   }
 
   .nav-toggle {
@@ -791,7 +781,7 @@ a:hover {
     padding: 0;
     gap: 0;
     display: none;
-    border-bottom: 3px solid var(--amber);
+    border-bottom: 1px solid var(--amber);
     max-height: calc(100vh - 100px);
     overflow-y: auto;
     z-index: 1000;
@@ -820,10 +810,6 @@ a:hover {
     font-size: 0.8rem;
   }
 
-  .nav-logo img {
-    height: 60px;
-  }
-
   /* Hero */
   .hero {
     height: 350px;
@@ -833,9 +819,8 @@ a:hover {
     padding: 1.5rem;
   }
 
-  .hero-content h1 {
-    font-size: 1.25rem;
-    line-height: 1.4;
+  .hero-logo {
+    width: min(280px, 70vw);
   }
 
   .hero-content p {
@@ -997,18 +982,13 @@ a:hover {
 
 /* Mobile phones */
 @media (max-width: 480px) {
-  /* Navigation */
-  .nav-logo img {
-    height: 50px;
-  }
-
   /* Hero */
   .hero {
     height: 300px;
   }
 
-  .hero-content h1 {
-    font-size: 1rem;
+  .hero-logo {
+    width: min(220px, 65vw);
   }
 
   .hero-content p {
@@ -1064,8 +1044,8 @@ a:hover {
 
 /* Small phones */
 @media (max-width: 360px) {
-  .hero-content h1 {
-    font-size: 0.85rem;
+  .hero-logo {
+    width: min(180px, 60vw);
   }
 
   .page-header h1 {
@@ -1087,20 +1067,20 @@ a:hover {
   .service-card:active,
   .location-card:active,
   .social-card:active {
-    transform: translate(4px, 4px);
+    transform: translate(3px, 3px);
     box-shadow: none;
   }
 
   .nav-links a:active {
-    color: var(--amber);
-    border-color: var(--amber);
+    color: var(--neon-green);
+    border-color: var(--neon-green);
   }
 
   .submit-btn:active,
   .social-link:active {
     background: var(--ink);
     color: var(--paper);
-    transform: translate(4px, 4px);
+    transform: translate(2px, 2px);
     box-shadow: none;
   }
 }
@@ -1111,8 +1091,8 @@ a:hover {
     height: 250px;
   }
 
-  .hero-content h1 {
-    font-size: 1rem;
+  .hero-logo {
+    width: min(200px, 50vw);
   }
 
   .page-header {
